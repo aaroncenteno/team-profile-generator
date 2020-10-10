@@ -7,10 +7,9 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
-
 const render = require("./lib/htmlRender");
+const Choice = require("inquirer/lib/objects/choice");
+const Choices = require("inquirer/lib/objects/choices");
 
 const promptManager = () => {
     return inquirer.prompt([
@@ -38,9 +37,23 @@ const promptManager = () => {
         const{name, id, email, officeNumber} = managerData
         employee = new Manager(name, id, email, officeNumber)
         let role = {role: "Manger"};
-        console.log(managerData);
         return {...managerData, ...role}
     })
 }
 
-promptManager();
+const promptEmployee = managerData => {
+    if (!managerData.engineers) {
+        managerData.engineers = [];
+    }
+    if(!managerData.interns) {
+        managerData.interns = [];
+    }
+    return inquirer.prompt ([
+        {
+            type: 'list',
+            name: 'role',
+            message: "Would you like to add an engineer, intern, or finish building your team?",
+            choices: ['Engineer', 'Intern', 'Finished']
+        }
+    ])
+}
