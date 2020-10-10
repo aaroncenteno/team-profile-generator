@@ -36,4 +36,27 @@ const generateEngineers = engineersArr => {
         `;
     })
     .join('')}
-    `}
+`}
+
+const generateInterns = internsArr => {
+    return `
+    ${internsArr
+        .map(({ name, id, email, school, role }) => {
+            return `
+            <div class="card shadow m-2 col-3">
+            <div class="card-header bg-primary ml-0 mt-1 rounded">
+                <h2 class= "card-title">${name}</h2>
+                <h5 class="card-text"><i class="fas fa-graduation-cap"></i>&nbsp;${role}</h5>
+            </div>
+            <div class="card-body bg-light my-2">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID: ${id}</li>
+                    <li class="list-group-item">Email: <a href="mailto:${email}">${email}</a></li>
+                    <li class="list-group-item">School: ${school}</li>
+                </ul>
+            </div>
+        </div>
+            `;
+    })
+    .join('')}
+`};
