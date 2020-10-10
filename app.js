@@ -55,5 +55,39 @@ const promptEmployee = managerData => {
             message: "Would you like to add an engineer, intern, or finish building your team?",
             choices: ['Engineer', 'Intern', 'Finished']
         }
-    ])
+    ]).then(({ role }) => {
+        if (role === "Engineer") {
+            return inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'name',
+                    message: "What is your engineer's name?"
+                },
+                {
+                    type: 'input',
+                    name: 'id',
+                    message: "What is your engineer's ID?"
+                },
+                {
+                    type: 'input',
+                    name: 'email',
+                    message: "What is your engineer's email?"
+                },
+                {
+                    type: 'input',
+                    name: 'github',
+                    message: "What is your engineer's GitHub username?"
+                }
+            ]).then(employeeData => {
+                employee = new Enigneer(employeeData.name, employeeData.id, employeeData.email, employeeData.github)
+                let role = {role: "Engineer"}
+                managerData.engineers.push({...employeeData,...role})
+                console.log(employeeData);
+                return promptEmployee(managerData)
+            })
+        }
+    })
 }
+
+promptManager()
+    .then(promptEmployee)
