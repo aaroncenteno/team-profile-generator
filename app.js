@@ -85,6 +85,37 @@ const promptEmployee = managerData => {
                 console.log(employeeData);
                 return promptEmployee(managerData)
             })
+        } else if (role === "Intern") {
+            return inquirer.prompt([
+                {
+                    type: "input",
+                    name: 'name',
+                    message: "What is your intern's name?"
+                },
+                {
+                    type: 'input',
+                    name: 'id',
+                    message: "What is your intern's ID?"
+                },
+                {
+                    type: 'input',
+                    name: 'email',
+                    message: "What is your intern's email?"
+                },
+                {
+                    type: 'input',
+                    name: 'school',
+                    message: 'What school does the intern attend?'
+                }
+            ]).then(employeeData => {
+                employeeData = new Intern(employeeData.name, employeeData.id, employeeData.email, employeeData.school)
+                let role = {role: "Intern"}
+                managerData.interns.push({...employeeData,...role})
+                console.log(employeeData)
+                return promptEmployee(managerData)
+            })
+        } else {
+            return managerData
         }
     })
 }
