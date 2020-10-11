@@ -43,6 +43,7 @@ Tests can be found in the '__tests__' directory of the application. To run a tes
 
 ## Tutorial Video
 
+https://drive.google.com/file/d/1s8UF3bJ_XPQwyEAlWo5ZMN2Tkuoi_Mez/view
 
 ## Screenshots
 
