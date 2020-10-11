@@ -58,7 +58,7 @@ const generateInterns = internsArr => {
             </ul>
         </div>
     </div>
-            `;
+    `;
     })
     .join('')}
 `};
