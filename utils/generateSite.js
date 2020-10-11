@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const writeFile = fileConten => {
+const writeFile = fileContent => {
     return new Promise((resolve, reject) => {
         fs.writeFile('./dist/index.html', fileContent, err => {
             if (err) {
@@ -18,7 +18,7 @@ const writeFile = fileConten => {
 
 const copyFile = () => {
     return new Promise((resolve, reject) => {
-        fs.copyFile('./src/style.css', './dist/style.css', err => {
+        fs.copyFile('./templates/style.css', './dist/style.css', err => {
             if (err) {
                 reject(err);
                 return;

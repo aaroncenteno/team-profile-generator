@@ -4,12 +4,14 @@ const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 
 const inquirer = require("inquirer");
-const path = require("path");
-const fs = require("fs");
+// const path = require("path");
+// const fs = require("fs");
+const generateSite = require('./templates/page-template');
+const {writeFile, copyFile } = require('./utils/generateSite');
 
-const render = require("./lib/htmlRender");
-const Choice = require("inquirer/lib/objects/choice");
-const Choices = require("inquirer/lib/objects/choices");
+// const render = require("./lib/htmlRender");
+// const Choice = require("inquirer/lib/objects/choice");
+// const Choices = require("inquirer/lib/objects/choices");
 
 const promptManager = () => {
     return inquirer.prompt([
@@ -122,3 +124,20 @@ const promptEmployee = managerData => {
 
 promptManager()
     .then(promptEmployee)
+    .then(managerData => {
+        return generateSite(managerData);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    })
+    .then(writeFileResponse => {
+        console.log("__________________")
+        console.log(writeFileResponse.message);
+        return copyFile();
+    }).then(copyFileResponse => {
+        console.log(copyFileResponse.message)
+        console.log("__________________");
+    })
+    .catch(err => {
+        console.log(err);
+    });
