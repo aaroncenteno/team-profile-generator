@@ -2,12 +2,12 @@
     font-size: 40px;
 }
 
-.navbar {
-    background-color: rgba(0, 0, 121, 0.918) !important;
-}
-
 body {
     background-color: rgb(218, 215, 255);
+}
+
+.navbar {
+    background-color: rgba(0, 0, 121, 0.918) !important;
 }
 
 .card {

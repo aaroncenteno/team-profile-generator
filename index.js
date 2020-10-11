@@ -4,14 +4,8 @@ const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 
 const inquirer = require("inquirer");
-// const path = require("path");
-// const fs = require("fs");
 const generateSite = require('./templates/page-template');
-const {writeFile, copyFile } = require('./utils/generateSite');
-
-// const render = require("./lib/htmlRender");
-// const Choice = require("inquirer/lib/objects/choice");
-// const Choices = require("inquirer/lib/objects/choices");
+const {writeFile, copyFile} = require('./utils/generateSite');
 
 const promptManager = () => {
     return inquirer.prompt([
@@ -84,7 +78,6 @@ const promptEmployee = managerData => {
                 employee = new Enigneer(employeeData.name, employeeData.id, employeeData.email, employeeData.github)
                 let role = {role: "Engineer"}
                 managerData.engineers.push({...employeeData,...role})
-                console.log(employeeData);
                 return promptEmployee(managerData)
             })
         } else if (role === "Intern") {
@@ -113,7 +106,6 @@ const promptEmployee = managerData => {
                 employeeData = new Intern(employeeData.name, employeeData.id, employeeData.email, employeeData.school)
                 let role = {role: "Intern"}
                 managerData.interns.push({...employeeData,...role})
-                console.log(employeeData)
                 return promptEmployee(managerData)
             })
         } else {
@@ -131,12 +123,12 @@ promptManager()
         return writeFile(pageHTML);
     })
     .then(writeFileResponse => {
-        console.log("__________________")
+        console.log("----------------------------")
         console.log(writeFileResponse.message);
         return copyFile();
     }).then(copyFileResponse => {
         console.log(copyFileResponse.message)
-        console.log("__________________");
+        console.log("----------------------------");
     })
     .catch(err => {
         console.log(err);
